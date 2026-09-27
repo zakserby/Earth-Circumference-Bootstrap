@@ -1,0 +1,109 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww30040\viewh16300\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # README\
+\
+This readme file was generated on **2025-11-11**  \
+\
+## GENERAL INFORMATION\
+\
+**Title of Dataset:** Monte Carlo Simulation Results for Earth Circumference Estimation (AEM 6850)\
+\
+- **Institution:** Cornell University  \
+- **Address:** Ithaca, NY, United States  \
+\
+- **Date of data collection:** Approximately 2025-11-11  \
+- **Location:** Ithaca, NY, USA  \
+\
+---\
+\
+## SHARING / ACCESS INFORMATION\
+\
+- **Was data derived from another source?**  \
+  - Yes. Data from a CSV file (`Eratosthenes.csv`) containing distance and height measurements.\
+\
+---\
+\
+## DATA & FILE OVERVIEW\
+\
+The main project folder is named **Earth-Circumference-Monte-Carlo**. Inside this folder are the following:\
+\
+### `script_files/`\
+Contains the R script used to:\
+- Compute Earth circumference estimates  \
+- Run naive and block bootstrap procedures  \
+- Generate the output figure  \
+\
+File:\
+- `earth_circumference_bootstrap.R`\
+\
+### `data/`\
+Contains the measurement data\
+\
+File:\
+- `Eratosthenes.csv`\
+\
+### `output_figure/`\
+Contains saved output figures\
+\
+File:\
+- `bootstrap_distributions.png`\
+\
+**Relationship between files:**  \
+`earth_circumference_bootstrap.R` reads `data/Eratosthenes.csv`, performs all analysis and saves figures into `output_figure/`.\
+\
+**Additional related data not included:** None  \
+\
+\
+## METHODOLOGICAL INFORMATION\
+\
+### Data Processing and Simulation\
+- Measurements for Ithaca and Kingston used to compute angles (`theta`) and angular differences  \
+- Earth circumference estimated as C = (2 * pi * s) / delta_theta where `s` is distance between locations  \
+- Bootstrapping methods:\
+  - **Naive bootstrap:** resampling rows of the dataset  \
+  - **Block bootstrap:** resampling by team grouping  \
+\
+- Bootstrap replications: `R = 1925`  \
+- Confidence intervals: 95% quantiles computed from bootstrap distributions  \
+\
+### Software Requirements\
+- **R (version 4.x or later)**  \
+- Required package: `boot`  \
+  (Automatically installed by the script if missing)  \
+\
+### Quality Assurance\
+- `set.seed(123)` used for reproducibility  \
+- Block bootstrap accounts for potential clustering by team  \
+\
+---\
+\
+## DATA-SPECIFIC INFORMATION\
+\
+### `bootstrap_distributions.png`\
+- **File type:** PNG  \
+- **Description:** Histogram comparing naive and block bootstrap distributions for Earth circumference. Shaded regions represent bootstrap distributions, dashed lines indicate 95% confidence intervals, solid line shows mean estimate, and a thicker dashed line marks the true circumference (40,030 km).  \
+\
+### `earth_circumference_bootstrap.R`\
+- **Final output variables:**\
+  - `circ_estimate` \'96 Estimated Earth circumference for each observation  \
+  - `theta_ithaca` \'96 Angle computed from Ithaca measurements  \
+  - `theta_kingston` \'96 Angle computed from Kingston measurements  \
+  - `delta_theta` \'96 Absolute angular difference  \
+  - `boot_naive` \'96 Naive bootstrap object  \
+  - `boot_block` \'96 Block bootstrap object  \
+- **Bootstrap CI variables (computed for plotting):**\
+  - `naive_ci`  \
+  - `block_ci`  \
+\
+- **Rows:** 500 in `Eratosthenes.csv` (100 teams)  \
+- **Missing data codes:** None  \
+- **Special abbreviations:**\
+  - \'93Naive\'94 = row-wise bootstrap  \
+  - \'93Grouped\'94 = block bootstrap by team  \
+"\
+}
